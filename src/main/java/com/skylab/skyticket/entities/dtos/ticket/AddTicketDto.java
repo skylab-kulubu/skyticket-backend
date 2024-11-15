@@ -27,6 +27,10 @@ public class AddTicketDto {
 
     private String university;
 
+    private String faculty;
+
+    private String department;
+
     private String view;
 
     private String favouriteCharacter;

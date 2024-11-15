@@ -41,6 +41,15 @@ public class User implements UserDetails {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "university")
+    private String university;
+
+    @Column(name = "faculty")
+    private String faculty;
+
+    @Column(name = "department")
+    private String department;
+
     @Column(name = "email")
     private String email;
 

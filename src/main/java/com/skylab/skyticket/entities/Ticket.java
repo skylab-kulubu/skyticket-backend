@@ -32,6 +32,9 @@ public class Ticket {
     @Column(name = "used_at")
     private LocalDateTime usedAt;
 
+    @Column(name = "is_sent")
+    private boolean isSent = false;
+
     /*
     @ManyToOne
     @JoinColumn(name = "image_id")

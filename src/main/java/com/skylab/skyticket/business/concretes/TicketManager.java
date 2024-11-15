@@ -60,6 +60,9 @@ public class TicketManager implements TicketService {
                    .lastName(addTicketDto.getLastName())
                    .email(addTicketDto.getEmail())
                    .phoneNumber(addTicketDto.getPhoneNumber())
+                   .faculty(addTicketDto.getFaculty())
+                   .department(addTicketDto.getDepartment())
+                   .university(addTicketDto.getUniversity())
                    .birthDate(addTicketDto.getBirthDate())
                    .authorities(Set.of(Role.ROLE_USER))
                    .build();
@@ -105,6 +108,7 @@ public class TicketManager implements TicketService {
                  .event(event)
                  .used(false)
                 .options(optionsOfTicket)
+                .isSent(false)
                 .usedAt(null)
                  .build();
 
