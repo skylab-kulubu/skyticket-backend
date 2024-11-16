@@ -7,6 +7,8 @@ public enum Option {
     DEADPOOL("Deadpool"),
     YODA("Yoda"),
     ADVENTURE_TIME("Adventure Time (Finn, Köpek Jake)"),
+    FINN("Finn"),
+    JAKE("Köpek Jake"),
     SPIDERMAN("Spiderman"),
     RICK("Rick"),
     HARLEY_QUINN("Harley Quinn"),
@@ -26,6 +28,8 @@ public enum Option {
     GWEN_STACY("Gwen Stacy"),
     SUPERMAN("Superman"),
     WOLVERINE("Wolverine"),
+    HULK("Hulk"),
+    ROGUE("Rogue"),
 
     YESIL("Yağmur ormanlarının içinde yemyeşil ağaçları"),
     MAVI("Sonsuz bir okyanus mavisini"),

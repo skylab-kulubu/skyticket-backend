@@ -94,6 +94,27 @@ public class TicketManager implements TicketService {
             Option viewOption = Option.fromDescription(addTicketDto.getView());
             Option characterOption = Option.fromDescription(addTicketDto.getFavouriteCharacter());
 
+            if (characterOption.equals(Option.ADVENTURE_TIME)){
+                int random = (int) (Math.random() *2);
+
+                if (random == 0){
+                    characterOption = Option.FINN;
+
+                }else {
+                    characterOption = Option.JAKE;
+                }
+            }
+
+                if (characterOption.equals(Option.GROOT)){
+                    characterOption = Option.WOODY;
+                }else if (characterOption.equals(Option.ROGUE)){
+                    characterOption = Option.RICK;
+                }
+                else if (characterOption.equals(Option.KIM_POSSIBLE)){
+                    characterOption = Option.HARLEY_QUINN;
+                }
+
+
             optionsOfTicket.add(viewOption);
             optionsOfTicket.add(characterOption);
 
@@ -203,6 +224,12 @@ public class TicketManager implements TicketService {
                         .firstName(result.get().getOwner().getFirstName())
                         .lastName(result.get().getOwner().getLastName())
                         .email(result.get().getOwner().getEmail())
+                        .phoneNumber(result.get().getOwner().getPhoneNumber())
+                        .university(result.get().getOwner().getUniversity())
+                        .faculty(result.get().getOwner().getFaculty())
+                        .department(result.get().getOwner().getDepartment())
+                        .birthDate(result.get().getOwner().getBirthDate().toString())
+                        .yildizskylabId(result.get().getOwner().getYildizskylabId())
                         .build())
                 .isUsed(result.get().isUsed())
                 .options(result.get().getOptions())
