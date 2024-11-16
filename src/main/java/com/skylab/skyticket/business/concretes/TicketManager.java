@@ -232,6 +232,7 @@ public class TicketManager implements TicketService {
                         .yildizskylabId(result.get().getOwner().getYildizskylabId())
                         .build())
                 .isUsed(result.get().isUsed())
+                .usedAt(result.get().getUsedAt())
                 .options(result.get().getOptions())
                 .build();
 
