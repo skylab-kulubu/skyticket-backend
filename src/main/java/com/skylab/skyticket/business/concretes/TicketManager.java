@@ -5,10 +5,8 @@ import com.skylab.skyticket.business.abstracts.ImageService;
 import com.skylab.skyticket.business.abstracts.TicketService;
 import com.skylab.skyticket.business.abstracts.UserService;
 import com.skylab.skyticket.business.constants.Messages;
-import com.skylab.skyticket.core.results.DataResult;
-import com.skylab.skyticket.core.results.ErrorDataResult;
-import com.skylab.skyticket.core.results.Result;
-import com.skylab.skyticket.core.results.SuccessDataResult;
+import com.skylab.skyticket.core.mail.EmailService;
+import com.skylab.skyticket.core.results.*;
 import com.skylab.skyticket.dataAccess.TicketDao;
 import com.skylab.skyticket.entities.Option;
 import com.skylab.skyticket.entities.Role;
@@ -18,6 +16,8 @@ import com.skylab.skyticket.entities.dtos.ticket.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,13 +32,13 @@ public class TicketManager implements TicketService {
 
     private final UserService userService;
 
-    private final ImageService imageService;
+    private final EmailService emailService;
 
-    public TicketManager(TicketDao ticketDao, EventService eventService, UserService userService, ImageService imageService) {
+    public TicketManager(TicketDao ticketDao, EventService eventService, UserService userService, ImageService imageService, EmailService emailService) {
         this.ticketDao = ticketDao;
         this.eventService = eventService;
         this.userService = userService;
-        this.imageService = imageService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -133,13 +133,48 @@ public class TicketManager implements TicketService {
                 .usedAt(null)
                  .build();
 
-            ticketDao.save(ticket);
+            ticket = ticketDao.save(ticket);
+
+        var mailResult = sendUserTicketViaMail(ticket);
+        if (!mailResult.isSuccess()){
+            return mailResult;
+        }
 
             return new SuccessDataResult<Ticket>(ticket, Messages.ticketAdded, HttpStatus.CREATED);
 
 
     }
 
+    private Result sendUserTicketViaMail(Ticket ticket) {
+
+        var user = ticket.getOwner();
+        var event = ticket.getEvent();
+
+        var subject = event.getName()+" Etkinliğine Katılım Biletiniz: "+ticket.getOwner().getFirstName()+" "+ticket.getOwner().getLastName();
+        String htmlContent;
+        try {
+            var htmlUrl = getClass().getClassLoader().getResource("katilim-mail.html");
+            htmlContent = Files.readString(Paths.get(htmlUrl.toURI()));
+
+           //change ticketId to string
+            htmlContent = htmlContent.replace("{ticket_id}", ticket.getId().toString());
+            htmlContent = htmlContent.replace("{first_name}", ticket.getOwner().getFirstName());
+            htmlContent = htmlContent.replace("{last_name}", ticket.getOwner().getLastName());
+            htmlContent = htmlContent.replace("{mail}", ticket.getOwner().getEmail());
+
+            var result = emailService.sendMail(user.getEmail(), subject, htmlContent);
+
+            if (!result.isSuccess()){
+                return result;
+            }
+
+            return new SuccessDataResult<>(Messages.ticketSent, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ErrorResult(Messages.mailNotSent, HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
 
     @Override

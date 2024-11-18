@@ -25,4 +25,7 @@ public class Messages {
     public static String passwordCannotBeNull = "Şifre boş olamaz!";
     public static String tokenGeneratedSuccessfully =   "Token başarıyla oluşturuldu!";
     public static String invalidUsernameOrPassword = "Geçersiz kullanıcı adı veya şifre!";
+    public static String htmlNotFound = "HTML dosyası bulunamadı!";
+    public static String mailNotSent = "Mail gönderilemedi!";
+    public static String ticketSent = "Bilet başarıyla gönderildi!";
 }
