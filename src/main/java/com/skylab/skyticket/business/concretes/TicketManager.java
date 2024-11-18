@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.Random;
 
 @Service
 public class TicketManager implements TicketService {
@@ -94,26 +95,24 @@ public class TicketManager implements TicketService {
             Option viewOption = Option.fromDescription(addTicketDto.getView());
             Option characterOption = Option.fromDescription(addTicketDto.getFavouriteCharacter());
 
-            if (characterOption.equals(Option.ADVENTURE_TIME)){
-                int random = (int) (Math.random() *2);
+            Random random = new Random();
 
-                if (random == 0){
-                    characterOption = Option.FINN;
-
-                }else {
-                    characterOption = Option.JAKE;
-                }
-            }
-
-                if (characterOption.equals(Option.GROOT)){
+            switch (characterOption) {
+                case ADVENTURE_TIME:
+                    characterOption = random.nextBoolean() ? Option.FINN : Option.JAKE;
+                    break;
+                case GROOT:
                     characterOption = Option.WOODY;
-                }else if (characterOption.equals(Option.ROGUE)){
+                    break;
+                case ROGUE:
                     characterOption = Option.RICK;
-                }
-                else if (characterOption.equals(Option.KIM_POSSIBLE)){
+                    break;
+                case KIM_POSSIBLE:
                     characterOption = Option.HARLEY_QUINN;
-                }
-
+                    break;
+                default:
+                    break;
+            }
 
             optionsOfTicket.add(viewOption);
             optionsOfTicket.add(characterOption);
