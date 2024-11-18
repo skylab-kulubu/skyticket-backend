@@ -25,13 +25,6 @@ public class GetUserDto {
 
     private String email;
 
-    private String birthDate;
-
-    private String university;
-
-    private String faculty;
-
-    private String department;
 
 
 }
