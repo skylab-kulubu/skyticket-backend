@@ -47,12 +47,24 @@ public enum Option {
     }
 
     public static Option fromDescription(String description) {
+        String normalizedDescription = normalizeString(description).trim();
         for (Option option : Option.values()) {
-            if (option.getDescription().equalsIgnoreCase(description.trim())) {
+            String normalizedOptionDescription = normalizeString(option.getDescription()).trim();
+            if (normalizedOptionDescription.equalsIgnoreCase(normalizedDescription)) {
                 return option;
             }
         }
         throw new IllegalArgumentException("No enum constant with description " + description);
+    }
+
+    private static String normalizeString(String input) {
+        if (input == null) {
+            return null;
+        }
+        String normalized = Normalizer.normalize(input, Normalizer.Form.NFKD);
+        normalized = normalized.replaceAll("\\p{M}", "");
+        normalized = normalized.replaceAll("\\s+", " ");
+        return normalized;
     }
 
 }
