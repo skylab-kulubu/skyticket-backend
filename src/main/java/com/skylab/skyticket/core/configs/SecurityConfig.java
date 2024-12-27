@@ -42,10 +42,34 @@ public class SecurityConfig {
                 .authorizeHttpRequests(x ->
                         x
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                                .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/api/tickets/**").permitAll()
-                                .requestMatchers("/api/events/**").hasAnyRole("ADMIN")
-                                .anyRequest().permitAll()
+
+                                // Auth endpoints
+                                .requestMatchers("/api/auth/login").permitAll()
+                                .requestMatchers("/api/auth/register").permitAll()
+
+                                // Event endpoints
+                                .requestMatchers("/api/events/addEvent").hasAnyRole("ADMIN")
+                                .requestMatchers("/api/events/getEventById/**").hasAnyRole("ADMIN")
+
+                                // Event day endpoints
+                                .requestMatchers("/api/event-days/addEventDay/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/api/event-days/getEventDayById/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/api/event-days/getEventDaysByEventId/**").hasAnyRole("ADMIN")
+
+                                // Session endpoints
+                                .requestMatchers("/api/sessions/addSession/**").hasAnyRole("ADMIN")
+
+                                // Ticket endpoints
+                                .requestMatchers("/api/tickets/addTicket").permitAll()
+                                .requestMatchers("/api/tickets/getTicketById/**").permitAll()
+                                .requestMatchers("/api/tickets/submitTicket/**").permitAll()
+
+                                // User endpoints
+                                .requestMatchers("/api/users/getUserById/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/api/users/getUserByEmail/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/api/users/getUserByPhoneNumber/**").hasAnyRole("ADMIN")
+
+                                .anyRequest().authenticated()
 
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

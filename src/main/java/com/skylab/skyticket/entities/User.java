@@ -71,6 +71,10 @@ public class User implements UserDetails {
     private List<Event> participatedEvents;
 
     @JsonIgnore
+    @ManyToMany(mappedBy = "participants")
+    private List<Session> sessions;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "owner")
     private List<Ticket> tickets;
 

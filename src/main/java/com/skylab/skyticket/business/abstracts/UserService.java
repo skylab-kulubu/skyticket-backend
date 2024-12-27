@@ -12,6 +12,10 @@ public interface UserService extends UserDetailsService {
 
     DataResult<User> getUserByEmail(String email);
 
+    DataResult<User> getUserByPhoneNumber(String phoneNumber);
+
     Result addUser(User user);
+
+    DataResult<User> getAuthenticatedUser();
 
 }

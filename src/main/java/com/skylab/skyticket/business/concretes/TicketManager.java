@@ -44,104 +44,118 @@ public class TicketManager implements TicketService {
 
     @Override
     public Result addTicket(AddTicketDto addTicketDto) {
-       var eventResult = eventService.getEventById(addTicketDto.getEventId());
-       if (!eventResult.isSuccess()){
-           return eventResult;
-       }
-       var event = eventResult.getData();
+        var eventResult = eventService.getEventById(addTicketDto.getEventId());
+        if (!eventResult.isSuccess()){
+            return eventResult;
+        }
+        var event = eventResult.getData();
 
-       User user;
-       var userResult = userService.getUserByEmail(addTicketDto.getEmail());
+        User user;
+        var userResult = userService.getUserByEmail(addTicketDto.getEmail());
 
-       if (userResult.isSuccess()) {
-           user = userResult.getData();
-       }else {
-           var userToAdd = User.builder()
-                   .firstName(addTicketDto.getFirstName())
-                   .lastName(addTicketDto.getLastName())
-                   .email(addTicketDto.getEmail())
-                   .phoneNumber(addTicketDto.getPhoneNumber())
-                   .faculty(addTicketDto.getFaculty())
-                   .department(addTicketDto.getDepartment())
-                   .university(addTicketDto.getUniversity())
-                   .birthDate(addTicketDto.getBirthDate())
-                   .authorities(Set.of(Role.ROLE_USER))
-                   .build();
+        if (userResult.isSuccess()) {
+            user = userResult.getData();
+        } else {
+            var userToAdd = User.builder()
+                    .firstName(addTicketDto.getFirstName())
+                    .lastName(addTicketDto.getLastName())
+                    .email(addTicketDto.getEmail())
+                    .phoneNumber(addTicketDto.getPhoneNumber())
+                    .faculty(addTicketDto.getFaculty())
+                    .department(addTicketDto.getDepartment())
+                    .university(addTicketDto.getUniversity())
+                    .birthDate(addTicketDto.getBirthDate())
+                    .authorities(Set.of(Role.ROLE_USER))
+                    .build();
 
             var userAddResult = userService.addUser(userToAdd);
-              if (!userAddResult.isSuccess()) {
-                  return userAddResult;
-              }
-              var userGetResult = userService.getUserByEmail(userToAdd.getEmail());
-                if (!userGetResult.isSuccess()){
-                    return userGetResult;
-                }
+            if (!userAddResult.isSuccess()) {
+                return userAddResult;
+            }
+            var userGetResult = userService.getUserByEmail(userToAdd.getEmail());
+            if (!userGetResult.isSuccess()){
+                return userGetResult;
+            }
 
-                user = userGetResult.getData();
-       }
+            user = userGetResult.getData();
+        }
 
-       if (addTicketDto.getView() == null || addTicketDto.getFavouriteCharacter() == null ||addTicketDto.getView().isEmpty() || addTicketDto.getFavouriteCharacter().isEmpty()){
-              return new ErrorDataResult<>(Messages.invalidOptions, HttpStatus.UNPROCESSABLE_ENTITY);
-       }
+        boolean hasView = addTicketDto.getView() != null && !addTicketDto.getView().isEmpty();
+        boolean hasFavouriteCharacter = addTicketDto.getFavouriteCharacter() != null && !addTicketDto.getFavouriteCharacter().isEmpty();
+        boolean hasSpecialOption = addTicketDto.getSpecialOption() != null && !addTicketDto.getSpecialOption().isEmpty();
 
+        if (!( (hasView && hasFavouriteCharacter) || hasSpecialOption )) {
+            return new ErrorDataResult<>(Messages.invalidOptions, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
-       var ticketResult = getTicketByUserIdAndEventId(user.getId(), event.getId());
-       if (ticketResult.isSuccess()){
-           return new ErrorDataResult<>(Messages.ticketAlreadyExists, HttpStatus.CONFLICT);
-       }
+        if (hasSpecialOption && (hasView || hasFavouriteCharacter)) {
+            return new ErrorDataResult<>(Messages.invalidOptions, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+
+        var ticketResult = getTicketByUserIdAndEventId(user.getId(), event.getId());
+        if (ticketResult.isSuccess()){
+            return new ErrorDataResult<>(Messages.ticketAlreadyExists, HttpStatus.CONFLICT);
+        }
 
         Set<Option> optionsOfTicket = new HashSet<>();
         try {
-            Option viewOption = Option.fromDescription(addTicketDto.getView());
-            Option characterOption = Option.fromDescription(addTicketDto.getFavouriteCharacter());
+            if (hasSpecialOption) {
+                Option specialOption = Option.fromDescription(addTicketDto.getSpecialOption());
 
-            Random random = new Random();
+                if (specialOption != Option.GECENIN_YILDIZI) {
+                    return new ErrorDataResult<>(Messages.invalidOptions, HttpStatus.BAD_REQUEST);
+                }
 
-            switch (characterOption) {
-                case ADVENTURE_TIME:
-                    characterOption = random.nextBoolean() ? Option.FINN : Option.JAKE;
-                    break;
-                case GROOT:
-                    characterOption = Option.WOODY;
-                    break;
-                case ROGUE:
-                    characterOption = Option.RICK;
-                    break;
-                case KIM_POSSIBLE:
-                    characterOption = Option.HARLEY_QUINN;
-                    break;
-                default:
-                    break;
+                optionsOfTicket.add(specialOption);
+            } else {
+                Option viewOption = Option.fromDescription(addTicketDto.getView());
+                Option characterOption = Option.fromDescription(addTicketDto.getFavouriteCharacter());
+
+                Random random = new Random();
+
+                switch (characterOption) {
+                    case ADVENTURE_TIME:
+                        characterOption = random.nextBoolean() ? Option.FINN : Option.JAKE;
+                        break;
+                    case GROOT:
+                        characterOption = Option.WOODY;
+                        break;
+                    case ROGUE:
+                        characterOption = Option.RICK;
+                        break;
+                    case KIM_POSSIBLE:
+                        characterOption = Option.HARLEY_QUINN;
+                        break;
+                    default:
+                        break;
+                }
+
+                optionsOfTicket.add(viewOption);
+                optionsOfTicket.add(characterOption);
             }
-
-            optionsOfTicket.add(viewOption);
-            optionsOfTicket.add(characterOption);
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return new ErrorDataResult<>(Messages.invalidOptions, HttpStatus.BAD_REQUEST);
         }
 
-
         var ticket = Ticket.builder()
-                 .owner(user)
-                 .event(event)
-                 .used(false)
+                .owner(user)
+                .event(event)
+                .used(false)
                 .options(optionsOfTicket)
                 .isSent(false)
                 .usedAt(null)
-                 .build();
+                .build();
 
-            ticket = ticketDao.save(ticket);
+        ticket = ticketDao.save(ticket);
 
         var mailResult = sendUserTicketViaMail(ticket);
         if (!mailResult.isSuccess()){
             return mailResult;
         }
 
-            return new SuccessDataResult<Ticket>(ticket, Messages.ticketAdded, HttpStatus.CREATED);
-
-
+        return new SuccessDataResult<Ticket>(ticket, Messages.ticketAdded, HttpStatus.CREATED);
     }
 
     private Result sendUserTicketViaMail(Ticket ticket) {
@@ -191,6 +205,8 @@ public class TicketManager implements TicketService {
 
         ticket.get().setUsed(true);
         ticket.get().setUsedAt(LocalDateTime.now());
+
+        ticket.get().getEvent().getParticipants().add(ticket.get().getOwner());
 
         var ticketResult = ticketDao.save(ticket.get());
 

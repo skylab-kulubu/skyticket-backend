@@ -10,6 +10,8 @@ import com.skylab.skyticket.dataAccess.UserDao;
 import com.skylab.skyticket.entities.Role;
 import com.skylab.skyticket.entities.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -55,6 +57,18 @@ public class UserManager implements UserService {
     }
 
     @Override
+    public DataResult<User> getUserByPhoneNumber(String phoneNumber) {
+
+        var result = userDao.findByPhoneNumber(phoneNumber);
+
+        if (result.isEmpty()){
+            return new ErrorDataResult<>(Messages.userNotFound, HttpStatus.NOT_FOUND);
+        }
+
+        return new SuccessDataResult<User>(result.get(), Messages.userFound, HttpStatus.OK);
+    }
+
+    @Override
     public Result addUser(User user) {
 
         user.setAuthorities(Set.of(Role.ROLE_USER));
@@ -65,4 +79,13 @@ public class UserManager implements UserService {
 
         return new SuccessDataResult<User>(user, Messages.userAdded, HttpStatus.CREATED);
     }
+
+    @Override
+    public DataResult<User> getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userMail = authentication.getName();
+        return getUserByEmail(userMail);
+    }
+
+
 }

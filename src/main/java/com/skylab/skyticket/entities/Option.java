@@ -35,7 +35,8 @@ public enum Option {
     YESIL("Yağmur ormanlarının içinde yemyeşil ağaçları"),
     MAVI("Sonsuz bir okyanus mavisini"),
     KIRMIZI("Bir yanardağının patladığı anı"),
-    MOR("Lavanta ve mor lalelerden bir çiçek bahçesini");
+    MOR("Lavanta ve mor lalelerden bir çiçek bahçesini"),
+    GECENIN_YILDIZI("Gecenin Yıldızı");
 
     private final String description;
 

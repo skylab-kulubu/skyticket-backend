@@ -35,6 +35,8 @@ public class AddTicketDto {
 
     private String favouriteCharacter;
 
+    private String specialOption;
+
 
 
 }

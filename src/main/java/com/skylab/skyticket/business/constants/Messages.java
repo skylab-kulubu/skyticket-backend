@@ -1,8 +1,11 @@
 package com.skylab.skyticket.business.constants;
 
 import com.skylab.skyticket.entities.Event;
+import com.skylab.skyticket.entities.Session;
 import com.skylab.skyticket.entities.Ticket;
 import org.springframework.http.HttpStatus;
+
+import java.util.List;
 
 public class Messages {
     public static String eventNameCannotBeNull = "Etkinlik adı boş olamaz!";
@@ -28,4 +31,13 @@ public class Messages {
     public static String htmlNotFound = "HTML dosyası bulunamadı!";
     public static String mailNotSent = "Mail gönderilemedi!";
     public static String ticketSent = "Bilet başarıyla gönderildi!";
+    public static String startDateMustBeBeforeEndDate = "Başlangıç tarihi bitiş tarihinden önce olmalıdır!";
+    public static String startDateAndEndDateCannotBeNull = "Başlangıç ve bitiş tarihleri boş olamaz!";
+    public static String eventDayAdded = "Etkinlik günü başarıyla eklendi!";
+    public static String sessionNameCannotBeNull = "Oturum adı boş olamaz!";
+    public static String sessionAdded = "Oturum başarıyla eklendi!";
+    public static String sessionDeleted = "Oturum başarıyla silindi!";
+    public static String eventDayNotFound = "Etkinlik günü bulunamadı!";
+    public static String sessionsFound = "Oturumlar başarıyla getirildi!";
+    public static String sessionNotFound = "Oturum bulunamadı!";
 }

@@ -40,6 +40,8 @@ public class Event {
     @Column(name = "capacity")
     private int capacity;
 
+
+
     /*
     private Image image;
     will be written
@@ -62,6 +64,10 @@ public class Event {
     @JsonManagedReference
     @OneToMany(mappedBy = "event")
     private List<Ticket> soldTickets;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "event")
+    private List<EventDay> eventDays;
 
 
 }
