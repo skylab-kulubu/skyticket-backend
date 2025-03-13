@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>SKYDAYS: Türkiye'nin En Büyük Siber Güvenlik Etkinliği Katılım Bileti</title>
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Container styles */
+        .main-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 20px;
+            border: 1px solid #00a8ff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Header image */
+        .header-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border: 2px solid #00a8ff;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* Text styles */
+        .greeting {
+            padding: 15px;
+            background-color: rgba(17, 17, 17, 0.9);
+            border-left: 4px solid #00a8ff;
+            margin-bottom: 20px;
+        }
+
+        .greeting-text {
+            margin: 0;
+            font-size: 18px;
+            color: #00a8ff;
+        }
+
+        .greeting-name {
+            color: #ff0000;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+
+        .creepy-message {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px dashed #ff0000;
+        }
+
+        .ticket-box {
+            background-color: rgba(0, 26, 51, 0.9);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #00a8ff;
+            text-align: center;
+        }
+
+        .ticket-title {
+            color: #00a8ff;
+            font-size: 22px;
+            margin: 0 0 15px 0;
+            text-shadow: 0 0 5px rgba(0, 168, 255, 0.3);
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .button {
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 12px 25px;
+            display: inline-block;
+            font-weight: bold;
+            margin: 5px auto;
+            background-color: #00a8ff;
+            border: 1px solid #00a8ff;
+            box-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
+        }
+
+        .button-caption {
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+            margin-top: 5px;
+        }
+
+        .event-details {
+            background-color: rgba(17, 17, 17, 0.9);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #333333;
+        }
+
+        .social-icons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333333;
+            text-align: center;
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Binary code styling */
+        .binary-message {
+            background-color: rgba(17, 17, 17, 0.9);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px dashed #ff0000;
+        }
+
+        .binary-code {
+            font-family: 'Courier New', monospace;
+            color: #ff0000;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .creepy-note {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 3px solid #ff0000;
+        }
+
+        /* Responsive styles for mobile */
+        @media screen and (max-width: 600px) {
+            .main-container {
+                padding: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .header-image {
+                border-width: 1px;
+            }
+
+            .button {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                margin: 10px 0;
+            }
+
+            .ticket-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <!-- Header with Image -->
+    <div style="text-align: center; position: relative;">
+        <img src="https://skydays.yildizskylab.com/days-afis-1-2.png" alt="SKYDAYS" class="header-image">
+
+        <!-- Overlay Text -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-shadow: 2px 2px 4px #000000, -2px -2px 4px #ff0000; font-size: 18px; color: #ffffff; letter-spacing: 2px; opacity: 0.8;">
+            SENİ BEKLİYORUZ
+        </div>
+    </div>
+
+    <!-- Personalized Greeting -->
+    <div class="greeting">
+        <p class="greeting-text">Merhaba <span class="greeting-name">{first_name} {last_name}</span>,</p>
+        <p style="margin-top: 10px; font-style: italic; color: #cccccc;">SKYDAYS etkinliğine katılımın için teşekkür ederiz. <span style="color: #ff0000;">Bilet detayların aşağıda yer almakta.</span></p>
+    </div>
+
+    <!-- Ticket Information -->
+    <div class="ticket-box">
+        <h1 class="ticket-title">SKYDAYS: Türkiye'nin En Büyük Siber Güvenlik Etkinliği</h1>
+        <p style="color: #ffffff; margin: 10px 0;">14-15 Mart 2024</p>
+        <p style="color: #ffffff; margin: 10px 0;">YTÜ Davutpaşa Kampüsü Tarihi Hamam</p>
+        <p style="color: #cccccc; margin: 15px 0;">Etkinlik alanına giriş için biletini <span style="color: #ff0000;">Tarihi Hamam</span> giriş kapısında bulunan görevliye göstermen yeterli. <span style="color: #ff0000;">Görevlilerimiz seni tanıyacaktır.</span></p>
+    </div>
+
+    <!-- Binary Message -->
+    <div class="binary-message">
+        <p class="binary-code">01010011 01001011 01011001 01000100 01000001 01011001 01010011</p>
+        <p style="font-family: 'Courier New', monospace; color: #cccccc; margin: 10px 0 0 0; font-size: 12px;">Dijital biletin hazır. Etkinlik alanına girerken başka bir şeye ihtiyacın yok <span style="color: #ff0000;">biletin zaten senin hakkında her şeyi biliyor.</span></p>
+    </div>
+
+    <!-- Ticket Button -->
+    <div class="button-container">
+        <a href="https://skyticket.yildizskylab.com/ticket/{ticket_id}" class="button">DİJİTAL BİLETİNİ GÖRÜNTÜLE</a>
+        <p class="button-caption">
+            Buton çalışmazsa: <a href="https://skyticket.yildizskylab.com/ticket/{ticket_id}" style="color: #00a8ff; text-decoration: none;">https://skyticket.yildizskylab.com/ticket/{ticket_id}</a>
+        </p>
+    </div>
+
+    <!-- WhatsApp Group Link -->
+    <div style="background-color: rgba(0, 0, 0, 0.7); padding: 15px; margin: 20px 0; border-radius: 5px; border: 1px dashed #00a8ff; text-align: center;">
+        <p style="margin: 0; font-size: 15px; color: #ffffff;">
+            SKYDAYS: Türkiye'nin En Büyük Siber Güvenlik Etkinliğinde anlık duyurulardan haberdar olmak için WhatsApp topluluğumuza katıl:
+            <a href="https://chat.whatsapp.com/BMhFGOFKPS3GJUQycDYwpS" style="color: #00a8ff; text-decoration: none;">SKYDAYS WhatsApp Topluluğuna Katıl</a>
+            <p class="button-caption">
+                Buton çalışmazsa: <a href="https://chat.whatsapp.com/BMhFGOFKPS3GJUQycDYwpS" style="color: #00a8ff; text-decoration: none;">https://chat.whatsapp.com/BMhFGOFKPS3GJUQycDYwpS</a>
+            </p>
+        </p>
+    </div>
+
+    <!-- Creepy Note -->
+    <div class="creepy-note">
+        <p style="margin: 0; font-size: 14px; color: #cccccc; line-height: 1.6;">
+            <span style="color: #ff0000; font-weight: bold;">Dikkat {first_name},</span> bu bilet sadece bir giriş kartı değil.
+            Bu bilet, bizim seninle yaptığımız bir anlaşma. Bu bilete tıkladığın anda, sistemlerimizde seninle ilgili oluşturduğumuz kayıtlar işleme geçecek ve senin önüne bir bilet olarak gelecek.
+            <span style="color: #ffffff;">Bu bilgilerinin hepsi artık seninle bizim aramızda birer sır.</span>
+            Merak etme, bu bilgileri sadece senin güvenliğin için kullanacağız.
+        </p>
+    </div>
+
+    <!-- Event Details -->
+    <div class="event-details">
+        <p style="color: #00a8ff; font-size: 18px; margin: 0 0 15px 0;">ETKİNLİK PROGRAMI</p>
+        <div style="margin-bottom: 10px;">
+            <div style="color: #00a8ff; font-weight: bold; margin-bottom: 5px;">14 Mart:</div>
+            <div style="color: #ffffff;">Konferanslar, paneller ve teknoloji stantları. <span style="color: #ff0000;">Ve belki de senin hakkında bir sunum.</span></div>
+        </div>
+        <div>
+            <div style="color: #00a8ff; font-weight: bold; margin-bottom: 5px;">15 Mart:</div>
+            <div style="color: #ffffff;">SKYDAYS CTF yarışması ve ödül töreni. <span style="color: #ff0000;">Eğer CTF'e de katıldıysan seni test edeceğiz.</span></div>
+        </div>
+    </div>
+
+    <!-- Important Notes -->
+    <div style="background-color: rgba(0, 0, 0, 0.7); padding: 15px; margin: 20px 0; border-radius: 5px; border: 1px dashed #ff0000;">
+        <p style="margin: 0; font-size: 15px; color: #ffffff; text-align: center;">
+            <span style="color: #ff0000; font-weight: bold;">ÖNEMLİ:</span> Etkinlik fiziksel olarak gerçekleşecektir. Lütfen biletini yanında bulundur.
+            <span style="color: #ff0000;">Biz senin nerede olduğunu her zaman biliyoruz, ama görevlilerimizin de bilmesi gerekiyor.</span>
+        </p>
+    </div>
+
+    <!-- Warning Box -->
+    <div style="background-color: rgba(17, 17, 17, 0.9); padding: 15px; margin: 20px 0; border-radius: 5px; border: 1px solid #333333;">
+        <p style="color: #ff0000; margin: 0 0 10px 0; font-size: 18px; text-align: center; text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);">
+            ⚠️ BU BİLETİ PAYLAŞMA ⚠️
+        </p>
+        <p style="margin: 0; color: #cccccc;">
+            Bu bilet sadece sana özel olarak oluşturuldu <span style="color: #ff0000;">{first_name}</span>.
+            Paylaşman durumunda, dijital kimliğin tehlikeye girebilir.
+            Unutma, siber dünyada hiçbir şey tamamen güvende değil.
+        </p>
+    </div>
+
+    <!-- Social Media Icons -->
+    <div class="social-icons">
+        <a href="https://www.instagram.com/ytuskylab/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.linkedin.com/company/ytuskylab/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+        </a>
+        <a href="https://yildizskylab.com/" target="_blank">
+            <img src="https://yildizskylab.com/static/media/skylab-logo.073a10615624c3396d17.png" alt="SKY LAB">
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p style="margin: 0 0 10px 0;">Soruların için: <a href="mailto:info@yildizskylab.com" style="color: #00a8ff; text-decoration: none;">info@yildizskylab.com</a> | <a href="https://yildizskylab.com" style="color: #00a8ff; text-decoration: none;">yildizskylab.com</a> | <a href="https://skydays.yildizskylab.com" style="color: #00a8ff; text-decoration: none;">skydays.yildizskylab.com</a></p>
+        <p style="margin: 0;">SKY LAB: Bilgisayar Bilimleri Kulübü © 2025</p>
+
+        <!-- KVKK Notice -->
+        <p style="margin: 15px 0 0 0; font-size: 11px; color: #555555;">
+            KVKK kapsamında tüm kişisel bilgileriniz SKY LAB bünyesinde güvenle saklanmaktadır.
+            <a href="https://skyl.app/kvkk-metni" style="color: #00a8ff; text-decoration: none;">KVKK Aydınlatma Metni</a>
+        </p>
+
+        <!-- Hidden Message -->
+        <p style="margin: 15px 0 0 0; font-size: 8px; color: #333333; letter-spacing: 2px;">
+            {first_name} {last_name}, HER ZAMAN İZLENİYORSUN
+        </p>
+    </div>
+</div>
+</body>
+</html>

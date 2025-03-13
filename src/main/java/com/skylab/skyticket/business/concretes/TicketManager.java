@@ -102,7 +102,7 @@ public class TicketManager implements TicketService {
             if (hasSpecialOption) {
                 Option specialOption = Option.fromDescription(addTicketDto.getSpecialOption());
 
-                if (specialOption != Option.GECENIN_YILDIZI) {
+                if (specialOption != Option.GECENIN_YILDIZI && specialOption != Option.SKYDAYS) {
                     return new ErrorDataResult<>(Messages.invalidOptions, HttpStatus.BAD_REQUEST);
                 }
 
@@ -166,7 +166,9 @@ public class TicketManager implements TicketService {
         var subject = event.getName()+" Etkinliğine Katılım Biletiniz: "+ticket.getOwner().getFirstName()+" "+ticket.getOwner().getLastName();
         String htmlContent;
         try {
-            var htmlUrl = getClass().getClassLoader().getResource("katilim-mail.html");
+
+            String mailFileName = getMailFilneNameFromTicketOptions(ticket.getOptions());
+            var htmlUrl = getClass().getClassLoader().getResource(mailFileName);
             htmlContent = Files.readString(Paths.get(htmlUrl.toURI()));
 
            //change ticketId to string
@@ -185,6 +187,20 @@ public class TicketManager implements TicketService {
 
         } catch (Exception e) {
             return new ErrorResult(Messages.mailNotSent, HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    private String getMailFilneNameFromTicketOptions(Set<Option> options) {
+        if (options.contains(Option.GECENIN_YILDIZI)){
+            return "katilim-mail.html"; //ozellestirilecek
+        } else if (options.contains(Option.SKYDAYS)){
+            return "katilim-mail-skydays.html";
+        } else if (options.contains(Option.YESIL) || options.contains(Option.MAVI) || options.contains(Option.KIRMIZI) || options.contains(Option.MOR)){
+            return "katilim-mail-artlab.html";
+        }
+        else {
+            return "katilim-mail.html"; //default mail hazirlanacak
         }
 
     }
