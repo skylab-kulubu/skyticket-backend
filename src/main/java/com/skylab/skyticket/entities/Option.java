@@ -38,7 +38,8 @@ public enum Option {
     MOR("Lavanta ve mor lalelerden bir çiçek bahçesini"),
 
     GECENIN_YILDIZI("Gecenin Yıldızı"),
-    SKYDAYS("Skydays");
+    SKYDAYS("Skydays"),
+    YILDIZJAM("Yıldız Jam");
 
     private final String description;
 
