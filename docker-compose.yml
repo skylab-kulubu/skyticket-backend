@@ -3,6 +3,7 @@ version: '3.8'
 services:
   skyticket-app:
     build: .
+    restart: unless-stopped
     ports:
       - "9001:9001"
     depends_on:
@@ -18,6 +19,7 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5495:5432"
+    restart: unless-stopped
     volumes:
       - ./data:/var/lib/postgresql/data
     networks:
