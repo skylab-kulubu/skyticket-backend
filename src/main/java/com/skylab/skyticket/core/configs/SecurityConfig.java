@@ -50,6 +50,8 @@ public class SecurityConfig {
                                 // Event endpoints
                                 .requestMatchers("/api/events/addEvent").hasAnyRole("ADMIN")
                                 .requestMatchers("/api/events/getEventById/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/api/events/getEventAttendeesToExcel/**").hasAnyRole("ADMIN")
+                                .requestMatchers("/api/events/getAllEvents").hasAnyRole("ADMIN")
 
                                 // Event day endpoints
                                 .requestMatchers("/api/event-days/addEventDay/**").hasAnyRole("ADMIN")

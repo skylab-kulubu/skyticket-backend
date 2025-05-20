@@ -1,4 +1,4 @@
-package com.skylab.skyticket.core.mail;
+package com.skylab.skyticket.core.utilities.mail;
 
 
 import com.skylab.skyticket.core.results.Result;

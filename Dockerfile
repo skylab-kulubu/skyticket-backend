@@ -12,6 +12,11 @@ RUN mvn -f /app/pom.xml clean package -DskipTests
 
 FROM openjdk:17-jdk-slim
 
+RUN apt-get update && apt-get install -y \
+    libfreetype6 \
+    fontconfig \
+ && rm -rf /var/lib/apt/lists/*
+
 EXPOSE 9001
 
 COPY --from=build /app/target/*.jar /app/app.jar

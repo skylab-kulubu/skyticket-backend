@@ -5,7 +5,7 @@ import com.skylab.skyticket.business.abstracts.ImageService;
 import com.skylab.skyticket.business.abstracts.TicketService;
 import com.skylab.skyticket.business.abstracts.UserService;
 import com.skylab.skyticket.business.constants.Messages;
-import com.skylab.skyticket.core.mail.EmailService;
+import com.skylab.skyticket.core.utilities.mail.EmailService;
 import com.skylab.skyticket.core.results.*;
 import com.skylab.skyticket.dataAccess.TicketDao;
 import com.skylab.skyticket.entities.Option;

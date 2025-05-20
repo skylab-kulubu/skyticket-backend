@@ -40,4 +40,5 @@ public class Messages {
     public static String eventDayNotFound = "Etkinlik günü bulunamadı!";
     public static String sessionsFound = "Oturumlar başarıyla getirildi!";
     public static String sessionNotFound = "Oturum bulunamadı!";
+    public static String eventsFound = "Etkinlikler başarıyla getirildi!";
 }
