@@ -31,6 +31,8 @@ public class AddTicketDto {
 
     private String department;
 
+    private String grade;
+
     private String view;
 
     private String favouriteCharacter;

@@ -65,6 +65,7 @@ public class TicketManager implements TicketService {
                     .department(addTicketDto.getDepartment())
                     .university(addTicketDto.getUniversity())
                     .birthDate(addTicketDto.getBirthDate())
+                    .grade(addTicketDto.getGrade())
                     .authorities(Set.of(Role.ROLE_USER))
                     .build();
 
