@@ -102,7 +102,7 @@ public class TicketManager implements TicketService {
             if (hasSpecialOption) {
                 Option specialOption = Option.fromDescription(addTicketDto.getSpecialOption());
 
-                if (specialOption != Option.GECENIN_YILDIZI && specialOption != Option.SKYDAYS && specialOption != Option.YILDIZJAM) {
+                if (specialOption != Option.GECENIN_YILDIZI && specialOption != Option.SKYDAYS && specialOption != Option.YILDIZJAM && specialOption != Option.ARTLAB) {
                     return new ErrorDataResult<>(Messages.invalidOptions, HttpStatus.BAD_REQUEST);
                 }
 
