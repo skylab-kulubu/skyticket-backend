@@ -37,6 +37,7 @@ public enum Option {
     KIRMIZI("Bir yanardağının patladığı anı"),
     MOR("Lavanta ve mor lalelerden bir çiçek bahçesini"),
 
+    ARTLAB("Artlab"),
     GECENIN_YILDIZI("Gecenin Yıldızı"),
     SKYDAYS("Skydays"),
     YILDIZJAM("Yıldız Jam");

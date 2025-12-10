@@ -1,130 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="x-apple-disable-message-reformatting">
-    <title>ARTLAB Email</title>
+    <title>ARTLAB: Yapay Zeka Zirvesi Katılım Bileti</title>
     <style>
+        /* --- Temel Ayarlar --- */
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-            background-color: #070332;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #02020a; /* Afişin en koyu tonu */
+            color: #e0e0e0;
         }
 
-        table {
-            border-spacing: 0;
-            border-collapse: collapse;
-        }
-
-        h1, h2, h3, p, a {
-            color: #ffffff !important;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .button {
-            background-color: #b74b4b;
-            color: #ffffff !important;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 14px;
-            display: inline-block;
-        }
-
-        /* Gmail uyumlu arka plan */
-        .background {
-            background-color: #070332;
-            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/artlab%20wide%20blank%20lowres-gSZkWhaXKPaSK1CliRIsxLAI2bY17x.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .overlay {
-            background-color: rgba(0, 0, 0, 0.85);
-            border-radius: 8px;
-            margin: 20px auto;
+        /* --- Ana Çerçeve --- */
+        .main-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #080814;
+            /* Afişteki mor/pembe geçişli border */
+            border: 1px solid #d63384; 
+            position: relative;
             overflow: hidden;
-            width: 600px;
-            max-width: 100%;
-            padding: 20px;
+            box-shadow: 0 0 50px rgba(214, 51, 132, 0.15);
         }
 
-        .social-icons img {
+        /* --- Header / Afiş Alanı --- */
+        .poster-container {
+            text-align: center;
+            background-color: #000;
+            border-bottom: 2px solid #d63384;
+            padding: 0;
+        }
+
+        .event-poster {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            display: block;
+            /* Afişin altına hafif neon yansıma */
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3); 
+        }
+
+        /* --- İçerik Alanı --- */
+        .content-padding {
+            padding: 30px 25px;
+        }
+
+        /* --- Kişiselleştirilmiş Mesaj Kutusu --- */
+        .ai-message-box {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(214, 51, 132, 0.05) 100%);
+            border-left: 4px solid #00f2ff; /* Afişteki mavi ton */
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .greeting-title {
+            color: #00f2ff;
+            font-size: 18px;
+            margin: 0 0 8px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* --- Terminal / Kod Bloğu (AI Konsepti) --- */
+        .code-block {
+            background-color: #0b0b14;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #00ff9d;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .code-line { margin: 5px 0; }
+        .code-comment { color: #666; font-style: italic; }
+        .highlight { color: #d63384; }
+
+        /* --- Bilet Butonu --- */
+        .button-wrapper {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .ticket-button {
+            /* Afişteki pembe-mor geçiş */
+            background: linear-gradient(90deg, #b00095 0%, #68009c 100%);
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             display: inline-block;
-            width: 30px;
-            height: 30px;
-            margin: 0 10px;
+            box-shadow: 0 0 20px rgba(176, 0, 149, 0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.2s;
+        }
+
+        .ticket-link-text {
+            font-size: 11px;
+            color: #888;
+            margin-top: 15px;
+            word-break: break-all;
+        }
+
+        /* --- Etkinlik Detayları (Grid) --- */
+        .details-box {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .detail-icon {
+            color: #d63384;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: #050508;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #555;
+            border-top: 1px solid #222;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        /* --- Responsive --- */
+        @media screen and (max-width: 600px) {
+            .main-container { width: 100% !important; border: none; }
+            .ticket-button { display: block; width: auto; margin: 0 20px; }
         }
     </style>
 </head>
 <body>
-<table width="100%" role="presentation" class="background">
-    <tr>
-        <td align="center">
-            <table role="presentation" class="overlay">
-                <!-- Logos -->
-                <tr>
-                    <td align="center" style="padding: 20px;">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/96308083-TVxXNYivLrUvuDowAoTYdMdFQPZ4Gv.png" alt="SKY LAB Logo" style="width: 100px; margin-right: 20px;">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ARTLAB_PEMBE_ALT-5tfGNyATZvkoWDxGGfRovoWIgToyO0.png" alt="ARTLAB Logo" style="width: 100px;">
-                    </td>
-                </tr>
 
-                <!-- Bilet Bilgisi -->
-                <tr>
-                    <td align="center" style="padding: 20px;">
-                        <h1 style="font-size: 24px; margin-bottom: 10px;">Merhaba, {first_name} {last_name}</h1>
-                        <p style="font-size: 16px; margin-bottom: 10px;">
-                            ARTLAB: Yapay Zeka Zirvesi'ne katılımınız için teşekkür ederiz!
-                        </p>
-                        <p style="font-size: 16px; margin-bottom: 10px;">
-                            Etkinlikte yapay zeka alanındaki öncü isimlerle bir araya gelecek ve sektörün yeni teknolojilerini keşfedeceksiniz.
-                        </p>
-                        <p style="font-size: 16px; margin-bottom: 20px;">
-                            Etkinlik alanına giriş için dijital biletinizi yanınızda bulundurmayı unutmayın.
-                        </p>
-                        <a href="https://skyticket.yildizskylab.com/ticket/{ticket_id}" class="button">
-                            Dijital Biletinizi Görüntüleyin
-                        </a>
-                        <p style="margin-top: 15px; font-size: 14px; color: #ffffff;">
-                            Eğer buton çalışmıyorsa, <a href="https://skyticket.yildizskylab.com/ticket/{ticket_id}" style="color: #b74b4b; text-decoration: underline;">https://skyticket.yildizskylab.com/ticket/{ticket_id}</a> adresini tarayıcınıza yapıştırabilirsiniz.
-                        </p>
-                    </td>
-                </tr>
+<div class="main-container">
+    
+    <div class="poster-container">
+        <img src="https://artlab.yildizskylab.com/assets/artlab-afis-dikey.png" alt="ARTLAB Zirve Afişi" class="event-poster">
+    </div>
 
-                <!-- Social Media Icons -->
-                <tr>
-                    <td align="center" style="padding: 20px;">
-                        <div class="social-icons">
-                            <a href="https://www.instagram.com/ytuskylab/" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-                            </a>
-                            <a href="https://www.linkedin.com/company/ytuskylab/" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
-                            </a>
-                            <a href="https://yildizskylab.com/" target="_blank">
-                                <img src="https://i.ibb.co/v11bDbr/96308083.png" alt="SKY LAB">
-                            </a>
-                        </div>
-                    </td>
-                </tr>
+    <div class="content-padding">
+        
+        <div class="ai-message-box">
+            <div class="greeting-title">
+                <span>◆ Veri Analizi Tamamlandı</span>
+            </div>
+            <p style="margin: 0; line-height: 1.5; color: #ddd;">
+                Merhaba <strong>{first_name} {last_name}</strong>,<br>
+                Yapay zeka modellerimiz katılımını doğruladı. Teknoloji ve sanatın sınırlarının yeniden çizileceği bu zirvede yerin ayrıldı.
+            </p>
+        </div>
 
-                <!-- KVKK Bilgisi -->
-                <tr>
-                    <td align="center" style="padding: 20px; font-size: 10px; color: #7f8c8d;">
-                        KVKK kapsamında tüm kişisel bilgileriniz SKY LAB bünyesinde güvenle saklanmaktadır.<br>
-                        SKY LAB: Bilgisayar Bilimleri Kulübü © 2024
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+        <div class="code-block">
+            <div class="code-comment">// Generating digital access key...</div>
+            <div class="code-line">> User: <span style="color: #fff">{first_name}</span></div>
+            <div class="code-line">> Status: <span class="highlight">CONFIRMED</span></div>
+            <div class="code-line">> Ticket_ID: <span style="color:#00f2ff">{ticket_id}</span></div>
+            <div class="code-line">> <span class="highlight">Ready_for_deployment</span></div>
+        </div>
+
+        <div class="button-wrapper">
+            <a href="https://skyticket.yildizskylab.com/ticket/{ticket_id}" class="ticket-button">
+                DİJİTAL BİLETİNİ GÖRÜNTÜLE
+            </a>
+            <div class="ticket-link-text">
+                Bağlantıda sorun yaşarsan:<br>
+                <a href="https://skyticket.yildizskylab.com/ticket/{ticket_id}" style="color: #d63384; text-decoration: none;">https://skyticket.yildizskylab.com/ticket/{ticket_id}</a>
+            </div>
+        </div>
+
+        <div class="details-box">
+            <h3 style="color: #fff; margin-top: 0; font-size: 16px; border-bottom: 1px solid #333; padding-bottom: 10px;">ZİRVE NOTLARI</h3>
+            
+            <div class="detail-row">
+                <span class="detail-icon">⚠️</span>
+                <div>
+                    <strong style="color: #d63384;">Dijital Bilet Güvenliği:</strong><br>
+                    <span style="font-size: 13px; color: #aaa;">Biletin sana özel şifrelenmiştir. Girişteki görevlimiz seni dijital kimliğinden tanıyacak.</span>
+                </div>
+            </div>
+            
+            <div class="detail-row" style="margin-bottom: 0;">
+                <span class="detail-icon">📍</span>
+                <div>
+                    <strong style="color: #00f2ff;">Konum:</strong><br>
+                    <span style="font-size: 13px; color: #aaa;">YTÜ Davutpaşa Kampüsü, Tarihi Hamam</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div style="margin-bottom: 20px;">
+            <a href="https://www.instagram.com/ytuskylab/" target="_blank" style="text-decoration:none; color: #888;">Instagram</a> • 
+            <a href="https://www.linkedin.com/company/ytuskylab/" target="_blank" style="text-decoration:none; color: #888;">LinkedIn</a> • 
+            <a href="https://yildizskylab.com/" target="_blank" style="text-decoration:none; color: #888;">Website</a>
+        </div>
+        
+        <p style="margin: 5px 0;">SKY LAB: Bilgisayar Bilimleri Kulübü © 2025</p>
+        <p style="margin: 5px 0; color: #444;">System ID: ARTLAB_MAIL_V3.0 // {first_name}</p>
+        
+        <div style="margin-top: 15px; font-size: 10px; color: #444;">
+            <a href="https://skyl.app/kvkk-metni" target="_blank" style="color: #555; text-decoration: underline;">KVKK ve Aydınlatma Metni</a> kapsamında verilerin SKY LAB sunucularında güvenle işlenmektedir.
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>

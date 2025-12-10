@@ -196,7 +196,7 @@ public class TicketManager implements TicketService {
             return "katilim-mail.html"; //ozellestirilecek
         } else if (options.contains(Option.SKYDAYS)){
             return "katilim-mail-skydays.html";
-        } else if (options.contains(Option.YESIL) || options.contains(Option.MAVI) || options.contains(Option.KIRMIZI) || options.contains(Option.MOR)){
+        } else if (options.contains(Option.ARTLAB)){
             return "katilim-mail-artlab.html";
         } else if (options.contains(Option.YILDIZJAM)){
             return "katilim-mail-yildizjam.html";
