@@ -1,4 +1,4 @@
-FROM maven:3.8.4-openjdk-17 AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
@@ -10,12 +10,9 @@ COPY src/ ./src/
 
 RUN mvn -f /app/pom.xml clean package -DskipTests
 
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:21-jre-alpine
 
-RUN apt-get update && apt-get install -y \
-    libfreetype6 \
-    fontconfig \
- && rm -rf /var/lib/apt/lists/*
+RUN apk update && apk add freetype fontconfig
 
 EXPOSE 9001
 
